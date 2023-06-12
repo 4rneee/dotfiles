@@ -1,0 +1,44 @@
+set number
+set relativenumber
+syntax on
+
+set tabstop=4 softtabstop=4 
+set expandtab
+set shiftwidth=4
+set smartindent
+set nowrap
+set smartcase
+set incsearch
+
+colorscheme koehler
+
+set cursorline
+hi CursorLine cterm=NONE ctermbg=234
+hi CursorLineNR cterm=bold
+
+" set colorcolumn=80
+" highlight ColorColumn ctermbg=0 guibg=lightgrey
+
+
+
+inoremap jj <Esc>
+nnoremap <Space> :
+
+
+nnoremap <C-d> <C-d>zz
+nnoremap <C-u> <C-u>zz
+nnoremap n nzz
+nnoremap N Nzz
+
+nnoremap <F4> :set hlsearch!<CR>
+
+
+" change focucs of split buffers
+nnoremap <C-H> <C-W><C-H>
+nnoremap <C-J> <C-W><C-J>
+nnoremap <C-K> <C-W><C-K>
+nnoremap <C-L> <C-W><C-L>
+
+" switch between tabs
+nnoremap H gT
+nnoremap L gt
