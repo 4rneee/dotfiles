@@ -52,6 +52,11 @@ lspconfig.lua_ls.setup {
             diagnostics = {
                 globals = { 'vim' }
             },
+            workspace = {
+                library = {
+                    ["/home/arne/code/git/chatterino2/docs/plugin-meta.lua"] = true
+                }
+            },
         }
     }
 }
