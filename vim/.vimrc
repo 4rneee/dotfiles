@@ -10,20 +10,16 @@ set nowrap
 set smartcase
 set incsearch
 
-colorscheme koehler
+" colorscheme koehler
+colorscheme default
 
 set cursorline
-hi CursorLine cterm=NONE ctermbg=234
+" hi CursorLine cterm=NONE  ctermbg=233
+hi CursorLine cterm=NONE
 hi CursorLineNR cterm=bold
 
 " set colorcolumn=80
 " highlight ColorColumn ctermbg=0 guibg=lightgrey
-
-
-
-inoremap jj <Esc>
-nnoremap <Space> :
-
 
 nnoremap <C-d> <C-d>zz
 nnoremap <C-u> <C-u>zz

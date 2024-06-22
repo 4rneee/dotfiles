@@ -17,7 +17,12 @@ toggleterm.setup({
     close_on_exit = true,
     shell = vim.o.shell,
     float_opts = {
-        width = 130,
+        width = function(_)
+            return math.floor(vim.o.columns * 0.75);
+        end,
+        height = function(_)
+            return math.floor(vim.o.lines * 0.75);
+        end,
         border = "single",
     },
 })

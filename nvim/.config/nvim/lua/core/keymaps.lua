@@ -8,14 +8,6 @@ vim.g.maplocalleader = ","
 -- Normal Mode --
 -----------------
 
-map("n", "<Space>", ":", {})
-
--- change focuso f split buffers
-map("n", "<C-H>", "<C-W><C-H>", {})
-map("n", "<C-J>", "<C-W><C-J>", {})
-map("n", "<C-K>", "<C-W><C-K>", {})
-map("n", "<C-L>", "<C-W><C-L>", {})
-
 -- center cursor after certain actions
 map("n", "n", "nzz", {})
 map("n", "N", "Nzz", {})
@@ -59,8 +51,6 @@ map('n', "<leader>fm", ":lua vim.lsp.buf.format()<CR>", {})
 -----------------
 -- Insert Mode --
 -----------------
-
-map("i", "jj", "<Esc>", {})
 
 
 -----------------

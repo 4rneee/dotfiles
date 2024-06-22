@@ -37,11 +37,12 @@ material.setup({
     custom_colors = function(colors)
         if vim.g.material_style == "deep ocean" then
             colors.editor.fg = "#dadada"
-            -- colors.editor.bg = "#03071e"
+            colors.syntax.variable = "#dadada"
+            colors.syntax.comments = "#767B8D"
         end
     end,
     custom_highlights = {
-        Search = {fg = "#000000", bg = "#ff8800", italic = false},
+        Search = {fg = "#000000", bg = "#ff7700", italic = false},
     }
 })
 
@@ -52,4 +53,5 @@ local functions = require('material.functions')
 vim.keymap.set("n", "<Leader>t", functions.find_style, {})
 
 -- line to show max column with
-vim.opt.colorcolumn='100'
+vim.opt.colorcolumn='101'
+-- vim.opt.colorcolumn='81'

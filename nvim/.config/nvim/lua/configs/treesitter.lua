@@ -5,7 +5,7 @@ end
 
 treesitter.setup {
     ensure_installed = {
-        'comment', 'c', 'python', 'lua', 'cpp'
+        'c', 'python', 'lua', 'cpp'
     },
     highlight = {
         enable = true,
@@ -16,12 +16,13 @@ treesitter.setup {
     }
 }
 
--- <============ Treesitter Context ============> 
+-- <============ Treesitter Context ============>
 ok, ts_context = pcall(require, 'treesitter-context')
 if not ok then
     return
 end
 
-ts_context.setup{
-    separator = ' '
+ts_context.setup {
+    separator = '',
+    max_lines=7,
 }

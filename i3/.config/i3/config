@@ -7,11 +7,12 @@ font pango: Noto Sans Regular 10
 workspace_layout default
 workspace_auto_back_and_forth yes
 
-new_window pixel 1
 default_border pixel 1
+# default_border normal 1
 default_floating_border pixel 2
 gaps inner 0
-gaps outer 9
+gaps outer 7
+gaps outer 5
 
 focus_follows_mouse yes
 
@@ -152,17 +153,24 @@ bindsym $mod+Shift+c reload
 bindsym $mod+Shift+r restart
 
 # Backlight control
-bindsym XF86MonBrightnessUp exec xbacklight +5 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
-bindsym XF86MonBrightnessDown exec xbacklight -5 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
+bindsym XF86MonBrightnessUp exec brightnessctl s +5%
+bindsym XF86MonBrightnessDown exec brightnessctl s 5%-
+# bindsym XF86MonBrightnessUp exec xbacklight +5 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
+# bindsym XF86MonBrightnessDown exec xbacklight -5 && notify-send "Brightness - $(xbacklight -get | cut -d '.' -f 1)%"
 
 # volume
-bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
-bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
-bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+
-bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%-
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym $mod+XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +1%
+bindsym $mod+XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -1%
+# bindsym XF86AudioRaiseVolume exec amixer -D pulse sset Master 5%+
+# bindsym XF86AudioLowerVolume exec amixer -D pulse sset Master 5%-
+# bindsym $mod+XF86AudioRaiseVolume exec amixer -D pulse sset Master 1%+
+# bindsym $mod+XF86AudioLowerVolume exec amixer -D pulse sset Master 1%-
 
 # mute
-bindsym XF86AudioMute exec amixer sset Master toggle
+bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle && notify-send -t 1000 -u normal "$([[ $(pactl get-sink-mute @DEFAULT_SINK@ | grep yes) ]] && echo muted || echo unmuted)"
+# bindsym XF86AudioMute exec pamixer sset Master toggle
 
 # play/pause and skip
 bindsym XF86AudioPlay exec playerctl play-pause; exec notify-send -t 2500 -u normal "$(playerctl -f '{{playerName}}' metadata)" "$(playerctl -f '{{title}}' metadata)\n$(playerctl -f '{{artist}}' metadata)"
@@ -175,11 +183,15 @@ bindsym $mod+F3 exec /usr/bin/thunar
 bindsym $mod+Ctrl+s exec flameshot gui
 
 # application menu
-bindsym $mod+d exec rofi -modi drun -show drun \
-		-config ~/.config/rofi/rofidmenu.rasi
+# bindsym $mod+d exec rofi -modi drun -show drun \
+# 		-config ~/.config/rofi/rofidmenu.rasi
+bindsym $mod+d exec dmenu_run
 
 # slect monitor layout
-bindsym $mod+Shift+m exec ~/.scripts/dmonitors.sh
+bindsym $mod+Shift+m exec ~/.local/bin/dmonitors
+
+# connect to paired bluetooth device
+bindsym $mod+Shift+b exec ~/.local/bin/bluetooth-dmenu
 
 # <=============== application specific rules ===============>
 
@@ -209,7 +221,7 @@ exec --no-startup-id ~/.screenlayout/monitor.sh
 exec --no-startup-id sleep 1 && ~/.fehbg
 
 # notifications
-exec --no-startup-id dbus-launch dunst --config ~/.config/dunst/dunstrc
+exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
 
 # networkmanager-applet
 exec --no-startup-id nm-applet
@@ -226,7 +238,7 @@ exec_always --no-startup-id   ~/.config/polybar/launch.sh
 # class                 border  backgr. text    indic.  child_border
 # client.focused          #5398BE #03071E #C5C8C6 #53adfe #5398BE
 # client.focused_inactive #183040 #03071E #C5C8C6 #183040 #183040
-# client.unfocused        #03071E #03071E #C5C8C6 #03071E
+# client.unfocused        #03071E #03071E #C5C8C6 #03071E #03071e
 # client.urgent           #CB4B16 #FDF6E3 #03071E #268BD2
 # client.placeholder      #000000 #0c0c0c #ffffff #000000 
 
@@ -240,8 +252,32 @@ exec_always --no-startup-id   ~/.config/polybar/launch.sh
 
 # black and white:
 # class                 border  backgr. text    indic.  child_border
-client.focused          #ffffff #000000 #C5C8C6 #cccccc #ffffff
-client.focused_inactive #777777 #000000 #C5C8C6 #777777 #777777
-client.unfocused        #222222 #000000 #C5C8C6 #222222 #222222
-client.urgent           #CB4B16 #FDF6E3 #03071E #268BD2
-client.placeholder      #000000 #0c0c0c #ffffff #000000 
+# client.focused          #ffffff #000000 #C5C8C6 #cccccc #ffffff
+# client.focused_inactive #777777 #000000 #C5C8C6 #777777 #777777
+# client.unfocused        #222222 #000000 #C5C8C6 #222222 #222222
+# client.urgent           #CB4B16 #FDF6E3 #03071E #268BD2
+# client.placeholder      #000000 #0c0c0c #ffffff #000000
+
+# material ocean:
+# class                 border  backgr. text    indic.  child_border
+# client.focused          #ff4151 #0f111a #e5e9f0 #ff7181 #ff4151
+# client.focused_inactive #bf646a #0f111a #e5e9f0 #bf646a #bf646a
+# client.unfocused        #4c566a #0f111a #e5e9f0 #4c566a #4c566a
+# client.urgent           #CB4B16 #FDF6E3 #03071E #ff7181
+# client.placeholder      #000000 #0c0c0c #e5e9f0 #000000
+
+# material ocean 2:
+# class                 border  backgr. text    indic.  child_border
+# client.focused          #b48ead #0f111a #e5e9f0 #c49edd #b48ead
+# client.focused_inactive #744e6d #0f111a #e5e9f0 #744e6d #744e6d
+# client.unfocused        #4c566a #0f111a #e5e9f0 #4c566a #4c566a
+# client.urgent           #CB4B16 #FDF6E3 #03071E #ff7181
+# client.placeholder      #000000 #0c0c0c #e5e9f0 #000000
+
+# material ocean 3:
+# class                 border  backgr. text    indic.  child_border
+client.focused          #88c0d0 #0f111a #e5e9f0 #a8e0f0 #88c0d0
+client.focused_inactive #5c768a #0f111a #e5e9f0 #5c768a #5c768a
+client.unfocused        #4c566a #0f111a #e5e9f0 #4c566a #4c566a
+client.urgent           #CB4B16 #FDF6E3 #03071E #ff7181
+client.placeholder      #000000 #0c0c0c #e5e9f0 #000000

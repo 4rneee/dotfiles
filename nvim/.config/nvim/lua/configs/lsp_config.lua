@@ -29,9 +29,10 @@ local on_attach = function(_, _)
     vim.keymap.set('n', '<leader>rn', vim.lsp.buf.rename, {})
     vim.keymap.set('n', '<leader>a', vim.lsp.buf.code_action, {})
 
-    vim.keymap.set('n', '<leader>gd', vim.lsp.buf.definition, {})
+    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
     vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, {})
     vim.keymap.set('n', '<leader>gu', require('telescope.builtin').lsp_references, {})
+    -- vim.keymap.set('n', '<leader>gu', vim.lsp.buf.references, {})
     vim.keymap.set('n', '<C-space>', vim.lsp.buf.hover, {})
 end
 
@@ -40,6 +41,7 @@ local capabilities = cmp_lsp.default_capabilities()
 lspconfig.clangd.setup {
     on_attach = on_attach,
     capabiliters = capabilities,
+    cmd = { "clangd" }, -- use the system-wide installed clangd because it has a newer version
 }
 
 lspconfig.lua_ls.setup {
@@ -48,10 +50,15 @@ lspconfig.lua_ls.setup {
     settings = {
         Lua = {
             diagnostics = {
-                globals = { 'vim', 'c2' }
-            }
+                globals = { 'vim' }
+            },
         }
     }
+}
+
+lspconfig.r_language_server.setup {
+    on_attach = on_attach,
+    capabiliters = capabilities,
 }
 
 lspconfig.rust_analyzer.setup {
@@ -62,6 +69,16 @@ lspconfig.rust_analyzer.setup {
 lspconfig.pylsp.setup {
     on_attach = on_attach,
     capabiliters = capabilities,
+    settings = {
+        pylsp = {
+            plugins = {
+                pycodestyle = {
+                    ignore = { "E302", "W291", "W293" },
+                    maxLineLength = 100
+                }
+            }
+        }
+    }
 }
 
 lspconfig.jdtls.setup {
@@ -91,9 +108,9 @@ lspconfig.asm_lsp.setup {
 
 
 local signs = {
-    Error = " ",
+    Error = "󰅚 ",
     Warn = " ",
-    Hint = " ",
+    Hint = "󰌶 ",
     Info = " "
 }
 
@@ -101,4 +118,3 @@ for type, icon in pairs(signs) do
     local hl = "DiagnosticSign" .. type
     vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = hl })
 end
-

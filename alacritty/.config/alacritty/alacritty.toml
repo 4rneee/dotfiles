@@ -1,0 +1,63 @@
+import = ["/home/arne/.config/alacritty/theme.toml"]
+# import = ["/home/arne/.config/alacritty/light-theme.toml"]
+# import = ["/home/arne/.config/alacritty/material-ocean.toml"]
+
+[cursor.style]
+blinking = "Off"
+shape = "Block"
+
+[colors.cursor]
+cursor  =   "#FFCC00"
+
+[env]
+TERM = "xterm-256color"
+
+[font]
+size = 9
+
+[font.bold]
+family = "CaskaydiaCove NF"
+style = "Bold"
+
+[font.bold_italic]
+family = "CaskaydiaCove NF"
+style = "Bold Italic"
+
+[font.italic]
+family = "CaskaydiaCove NF"
+style = "Italic"
+
+[font.normal]
+family = "CaskaydiaCove NF"
+style = "Regular"
+
+[[keyboard.bindings]]
+action = "ScrollPageUp"
+key = "PageUp"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollPageDown"
+key = "PageDown"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "ScrollToBottom"
+key = "End"
+mode = "~Alt"
+mods = "Shift"
+
+[[keyboard.bindings]]
+action = "SpawnNewInstance"
+key = "Return"
+mods = "Control|Shift"
+
+[scrolling]
+history = 5000
+multiplier = 5
+
+[window.padding]
+x = 0
+y = 0
