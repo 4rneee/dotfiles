@@ -1,6 +1,6 @@
-import = ["/home/arne/.config/alacritty/theme.toml"]
-# import = ["/home/arne/.config/alacritty/light-theme.toml"]
-# import = ["/home/arne/.config/alacritty/material-ocean.toml"]
+general.import = ["/home/arne/.config/alacritty/theme.toml"]
+# general.import = ["/home/arne/.config/alacritty/light-theme.toml"]
+# general.import = ["/home/arne/.config/alacritty/material-ocean.toml"]
 
 [cursor.style]
 blinking = "Off"
@@ -13,7 +13,7 @@ cursor  =   "#FFCC00"
 TERM = "xterm-256color"
 
 [font]
-size = 9
+size = 10
 
 [font.bold]
 family = "CaskaydiaCove NF"
