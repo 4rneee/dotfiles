@@ -13,18 +13,12 @@ local core_modules = {
 "configs/colorscheme",
 "configs/treesitter",     -- Syntax Highlighting
 "configs/statusline",     -- Status Line
-"configs/commentary",     -- Easily Comment Lines
 "configs/nvimtree",       -- File Explorer
 "configs/gitsigns",       -- Git Integration
 "configs/telescope",      -- Fuzzy finder
 "configs/colorizer",      -- Colors Highlighter
-"configs/toggleterm",     -- Floating Terminal
 "configs/autoclose",      -- autoclose brackets
 "configs/lsp_config",
-"configs/symbols-outline",
-
----- Other Utilities --------------------------------
- -- "utils/utils",            -- Utilities
 
 }
 -- Using pcall we can handle better any loading issues

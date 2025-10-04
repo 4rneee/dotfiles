@@ -4,9 +4,6 @@ if not ok then
 end
 
 treesitter.setup {
-    ensure_installed = {
-        'c', 'python', 'lua', 'cpp'
-    },
     highlight = {
         enable = true,
     },
@@ -17,8 +14,8 @@ treesitter.setup {
 }
 
 -- <============ Treesitter Context ============>
-ok, ts_context = pcall(require, 'treesitter-context')
-if not ok then
+local ok2, ts_context = pcall(require, 'treesitter-context')
+if not ok2 then
     return
 end
 

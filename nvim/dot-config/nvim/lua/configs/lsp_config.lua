@@ -1,28 +1,9 @@
-local m_ok, mason = pcall(require, "mason")
-if not m_ok then
-    return
-end
-
-local mlsp_ok, mason_lspconfig = pcall(require, "mason-lspconfig")
-if not mlsp_ok then
-    return
-end
-
-local lspc_ok, lspconfig = pcall(require, "lspconfig")
-if not lspc_ok then
-    return
-end
+local lsp = vim.lsp
 
 local cmplsp_ok, cmp_lsp = pcall(require, "cmp_nvim_lsp")
 if not cmplsp_ok then
     return
 end
-
-mason.setup()
-
-mason_lspconfig.setup({
-    ensure_installed = { "lua_ls", "clangd" }
-})
 
 
 local on_attach = function(_, _)
@@ -31,20 +12,33 @@ local on_attach = function(_, _)
 
     vim.keymap.set('n', 'gd', vim.lsp.buf.definition, {})
     vim.keymap.set('n', '<leader>gi', vim.lsp.buf.implementation, {})
-    vim.keymap.set('n', '<leader>gu', require('telescope.builtin').lsp_references, {})
-    -- vim.keymap.set('n', '<leader>gu', vim.lsp.buf.references, {})
+    --vim.keymap.set('n', '<leader>gu', require('telescope.builtin').lsp_references, {})
+    vim.keymap.set('n', '<leader>gu', vim.lsp.buf.references, {})
     vim.keymap.set('n', '<C-space>', vim.lsp.buf.hover, {})
 end
 
-local capabilities = cmp_lsp.default_capabilities()
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = cmp_lsp.default_capabilities(capabilities)
 
-lspconfig.clangd.setup {
+lsp.config['clangd'] = {
     on_attach = on_attach,
     capabiliters = capabilities,
-    cmd = { "clangd" }, -- use the system-wide installed clangd because it has a newer version
 }
+lsp.enable('clangd')
 
-lspconfig.lua_ls.setup {
+lsp.config['gopls'] = {
+    on_attach = on_attach,
+    capabiliters = capabilities,
+}
+lsp.enable('gopls')
+
+lsp.config['rust_analyzer'] = {
+    on_attach = on_attach,
+    capabiliters = capabilities,
+}
+lsp.enable('rust_analyzer')
+
+lsp.config['lua_ls'] = {
     on_attach = on_attach,
     capabiliters = capabilities,
     settings = {
@@ -60,56 +54,36 @@ lspconfig.lua_ls.setup {
         }
     }
 }
+lsp.enable('lua_ls')
 
-lspconfig.r_language_server.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
-
-lspconfig.rust_analyzer.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
-
-lspconfig.pylsp.setup {
+lsp['pylsp'] = {
     on_attach = on_attach,
     capabiliters = capabilities,
     settings = {
         pylsp = {
             plugins = {
                 pycodestyle = {
-                    ignore = { "E302", "W291", "W293" },
+                    ignore = { "E302", "W291", "W293", "E111", "E251", "E117", "E226", "E265", "E225", "E501", "E303"},
                     maxLineLength = 100
                 }
             }
         }
     }
 }
+lsp.enable('pylsp')
 
-lspconfig.jdtls.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
-
-lspconfig.gopls.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
-
-lspconfig.texlab.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
-
-lspconfig.cmake.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
-
-lspconfig.asm_lsp.setup {
-    on_attach = on_attach,
-    capabiliters = capabilities,
-}
+-- lspconfig.texlab.setup {
+--     on_attach = on_attach,
+--     capabiliters = capabilities,
+-- }
+--
+-- vim.g.tex_flavor = "latex"
+-- lspconfig.ltex.setup {
+--     on_attach = on_attach,
+--     capabilities = capabilities,
+--     -- filetypes = { "markdown", "tex", "plaintex" }
+--     filetypes = { "tex", "plaintex" }
+-- }
 
 
 local signs = {
