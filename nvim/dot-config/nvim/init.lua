@@ -1,5 +1,3 @@
--- highly inspired by luavim (https://github.com/elairavi/luavim)
-
 local core_modules = {
 
 ---- Core Settings ----------------------------------
@@ -9,15 +7,11 @@ local core_modules = {
 
 ---- Plugin Configurations --------------------------
 "configs/completion",     -- Auto Completion
-"configs/impatient",      -- Improve Startup Time
 "configs/colorscheme",
 "configs/treesitter",     -- Syntax Highlighting
-"configs/statusline",     -- Status Line
 "configs/nvimtree",       -- File Explorer
 "configs/gitsigns",       -- Git Integration
-"configs/telescope",      -- Fuzzy finder
 "configs/colorizer",      -- Colors Highlighter
-"configs/autoclose",      -- autoclose brackets
 "configs/lsp_config",
 
 }

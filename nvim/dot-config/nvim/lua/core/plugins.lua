@@ -26,13 +26,8 @@ return packer.startup(function(use)
     use "kyazdani42/nvim-tree.lua" -- file tree
     use "nvim-treesitter/nvim-treesitter" -- Treesitter
     use "nvim-treesitter/nvim-treesitter-context" -- context
-    use "nvim-lualine/lualine.nvim" -- statusline
     use "norcalli/nvim-colorizer.lua" -- Colors highlighter
-    use "lewis6991/impatient.nvim" -- Speed up loading Lua modules to improve startup time
-    use 'nvim-telescope/telescope.nvim' -- Find, filter, preview, pick. all lua, with telescope
-    use 'nvim-lua/plenary.nvim' -- Plenary, a dependency of telescope
     use 'marko-cerovac/material.nvim' -- material colorscheme
-    use 'm4xshen/autoclose.nvim' -- autoclose brackets and other stuff
     use 'neovim/nvim-lspconfig'
     use {
         'hrsh7th/nvim-cmp',
