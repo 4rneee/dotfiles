@@ -34,3 +34,5 @@ set.splitbelow = true
 set.showmode = false -- dont show mode, because custom statusline already does
 
 set.spellsuggest="best, 9"
+
+set.path=set.path + "**"

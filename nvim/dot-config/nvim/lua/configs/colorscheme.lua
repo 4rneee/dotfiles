@@ -28,7 +28,8 @@ material.setup({
     -- "which-key",
 },
     disable = {
-        eob_lines = true
+        -- eob_lines = false,
+        background = true,
     },
     high_visibility = {
         lighter = true,
@@ -36,13 +37,15 @@ material.setup({
     },
     custom_colors = function(colors)
         if vim.g.material_style == "deep ocean" then
-            colors.editor.fg = "#dadada"
-            colors.syntax.variable = "#dadada"
-            colors.syntax.comments = "#767B8D"
+            colors.editor.fg = "#ffffff"
+            colors.syntax.variable = "#ffffff"
+            colors.syntax.comments = "#888888"
         end
     end,
     custom_highlights = {
         Search = {fg = "#000000", bg = "#ff7700", italic = false},
+        CurSearch = {fg = "#000000", bg = "#ffff00", italic = false},
+        IncSearch = {fg = "#000000", bg = "#ffff00", italic = false},
     }
 })
 
