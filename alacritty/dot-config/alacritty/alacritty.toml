@@ -1,4 +1,5 @@
-general.import = ["/home/arne/.config/alacritty/theme.toml"]
+#general.import = ["/home/arne/.config/alacritty/theme.toml"]
+general.import = ["/home/arne/.config/alacritty/theme2.toml"]
 # general.import = ["/home/arne/.config/alacritty/light-theme.toml"]
 # general.import = ["/home/arne/.config/alacritty/material-ocean.toml"]
 
