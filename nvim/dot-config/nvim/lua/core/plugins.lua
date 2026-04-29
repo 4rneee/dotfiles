@@ -28,7 +28,6 @@ return packer.startup(function(use)
     use "nvim-treesitter/nvim-treesitter-context" -- context
     use "norcalli/nvim-colorizer.lua" -- Colors highlighter
     use 'marko-cerovac/material.nvim' -- material colorscheme
-    use 'neovim/nvim-lspconfig'
     use {
         'hrsh7th/nvim-cmp',
         'hrsh7th/cmp-nvim-lsp',

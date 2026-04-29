@@ -20,21 +20,27 @@ end
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = cmp_lsp.default_capabilities(capabilities)
 
-lsp.config['clangd'] = {
+lsp.config('clangd', {
     on_attach = on_attach,
     capabiliters = capabilities,
-}
+    filetypes = { 'c', 'cpp' },
+    cmd = { 'clangd' },
+})
 lsp.enable('clangd')
 
 lsp.config['gopls'] = {
     on_attach = on_attach,
     capabiliters = capabilities,
+    filetypes = { 'go' },
+    cmd = { 'gopls' },
 }
 lsp.enable('gopls')
 
 lsp.config['rust_analyzer'] = {
     on_attach = on_attach,
     capabiliters = capabilities,
+    filetypes = { 'rust' },
+    cmd = { 'rust-analyzer' },
 }
 lsp.enable('rust_analyzer')
 
@@ -52,7 +58,9 @@ lsp.config['lua_ls'] = {
                 }
             },
         }
-    }
+    },
+    filetypes = { 'lua' },
+    cmd = { 'lua-language-server' },
 }
 lsp.enable('lua_ls')
 
@@ -68,14 +76,20 @@ lsp['pylsp'] = {
                 }
             }
         }
-    }
+    },
+    filetypes = { 'python' },
+    cmd = { 'pylsp' },
 }
 lsp.enable('pylsp')
 
--- lspconfig.texlab.setup {
---     on_attach = on_attach,
---     capabiliters = capabilities,
--- }
+lsp.config['texlab'] = {
+    on_attach = on_attach,
+    capabiliters = capabilities,
+    filetypes = { 'tex', 'bib' },
+    cmd = { 'texlab' },
+}
+lsp.enable('texlab')
+
 --
 -- vim.g.tex_flavor = "latex"
 -- lspconfig.ltex.setup {
