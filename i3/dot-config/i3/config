@@ -64,8 +64,8 @@ bindsym $mod+Shift+9 move container to workspace $ws9; workspace $ws9
 # move focused workspace between monitors
 bindsym $mod+Ctrl+period move workspace to output right
 bindsym $mod+Ctrl+comma move workspace to output left
-bindsym $mod+Ctrl+minus move workspace to output down
-bindsym $mod+Ctrl+plus move workspace to output up 
+bindsym $mod+Ctrl+bracketleft move workspace to output down
+bindsym $mod+Ctrl+bracketright move workspace to output up
 
 # change focus
 bindsym $mod+h focus left
@@ -124,13 +124,12 @@ mode "resize" {
 bindsym $mod+0 mode "$mode_system"
 set $mode_system (l)ock, (e)xit, switch_(u)ser, (s)uspend, (h)ibernate, (r)eboot, (Shift+s)hutdown
 mode "$mode_system" {
-    bindsym l exec --no-startup-id ~/.config/i3/scripts/blur-lock, mode "default"
-    bindsym s exec --no-startup-id i3exit suspend, mode "default"
-    bindsym u exec --no-startup-id i3exit switch_user, mode "default"
-    bindsym e exec --no-startup-id i3exit logout, mode "default"
-    bindsym h exec --no-startup-id i3exit hibernate, mode "default"
-    bindsym r exec --no-startup-id i3exit reboot, mode "default"
-    bindsym Shift+s exec --no-startup-id i3exit shutdown, mode "default"
+    bindsym l exec --no-startup-id i3lock -c ffffff, mode "default"
+    bindsym s exec --no-startup-id i3lock -c ffffff && systemctl suspend, mode "default"
+    bindsym e exit, mode "default"
+    bindsym h exec --no-startup-id i3lock -c ffffff && systemctl hibernate, mode "default"
+    bindsym r exec --no-startup-id systemctl reboot, mode "default"
+    bindsym Shift+s exec --no-startup-id systemctl poweroff, mode "default"
 
     # exit system mode: "Enter" or "Escape"
     bindsym Return mode "default"
@@ -178,9 +177,11 @@ bindsym XF86AudioNext exec playerctl next
 bindsym XF86AudioPrev exec playerctl previous
 
 # applications
-bindsym $mod+F2 exec /usr/bin/firefox
+bindsym $mod+F2 exec librewolf
 bindsym $mod+F3 exec /usr/bin/thunar
 bindsym $mod+Ctrl+s exec flameshot gui
+
+bindsym $mod+Shift+t exec ~/.config/polybar/scripts/zeit.sh click
 
 # application menu
 # bindsym $mod+d exec rofi -modi drun -show drun \
@@ -193,6 +194,8 @@ bindsym $mod+Shift+m exec ~/.local/bin/dmonitors
 # connect to paired bluetooth device
 bindsym $mod+Shift+b exec ~/.local/bin/bluetooth-dmenu
 
+#bindsym $mod+Shift+p exec alacritty --class Pinentry -e ~/.local/bin/passmenu
+bindsym $mod+Shift+p exec ~/.local/bin/passmenu
 
 bindsym $mod+Shift+f exec polybar-msg cmd toggle
 
@@ -210,6 +213,7 @@ for_window [class="Pavucontrol" instance="pavucontrol"] floating enable
 for_window [class="qt5ct" instance="qt5ct"] floating enable
 for_window [class="Bluetooth-sendto" instance="bluetooth-sendto"] floating enable
 for_window [window_role="About"] floating enable
+for_window [class="Pinentry"] floating enable
 
 # <=============== autostart ===============>
 exec --no-startup-id /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -221,7 +225,7 @@ exec --no-startup-id numlockx on
 exec --no-startup-id ~/.screenlayout/monitor.sh
 
 # set background
-exec --no-startup-id sleep 1 && ~/.fehbg
+# exec --no-startup-id sleep 1 && ~/.fehbg
 
 # notifications
 exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
@@ -229,8 +233,8 @@ exec --no-startup-id dunst --config ~/.config/dunst/dunstrc
 # networkmanager-applet
 exec --no-startup-id nm-applet
 
-# clipboard manager
-exec --no-startup-id parcellite
+# password manager
+exec --no-startup-id keepassxc
 
 # start bar
 exec_always --no-startup-id   ~/.config/polybar/launch.sh
@@ -255,11 +259,11 @@ exec_always --no-startup-id   ~/.config/polybar/launch.sh
 
 # black and white:
 # class                 border  backgr. text    indic.  child_border
-# client.focused          #ffffff #000000 #C5C8C6 #cccccc #ffffff
-# client.focused_inactive #777777 #000000 #C5C8C6 #777777 #777777
-# client.unfocused        #222222 #000000 #C5C8C6 #222222 #222222
-# client.urgent           #CB4B16 #FDF6E3 #03071E #268BD2
-# client.placeholder      #000000 #0c0c0c #ffffff #000000
+client.focused          #ffffff #000000 #ffffff #cccccc #ffffff
+client.focused_inactive #777777 #000000 #ffffff #777777 #777777
+client.unfocused        #222222 #000000 #ffffff #222222 #222222
+client.urgent           #CB4B16 #FDF6E3 #03071E #268BD2
+client.placeholder      #000000 #0c0c0c #ffffff #000000
 
 # material ocean:
 # class                 border  backgr. text    indic.  child_border
@@ -279,8 +283,8 @@ exec_always --no-startup-id   ~/.config/polybar/launch.sh
 
 # material ocean 3:
 # class                 border  backgr. text    indic.  child_border
-client.focused          #88c0d0 #0f111a #e5e9f0 #a8e0f0 #88c0d0
-client.focused_inactive #5c768a #0f111a #e5e9f0 #5c768a #5c768a
-client.unfocused        #4c566a #0f111a #e5e9f0 #4c566a #4c566a
-client.urgent           #CB4B16 #FDF6E3 #03071E #ff7181
-client.placeholder      #000000 #0c0c0c #e5e9f0 #000000
+# client.focused          #88c0d0 #0f111a #e5e9f0 #a8e0f0 #88c0d0
+# client.focused_inactive #5c768a #0f111a #e5e9f0 #5c768a #5c768a
+# client.unfocused        #4c566a #0f111a #e5e9f0 #4c566a #4c566a
+# client.urgent           #CB4B16 #FDF6E3 #03071E #ff7181
+# client.placeholder      #000000 #0c0c0c #e5e9f0 #000000
