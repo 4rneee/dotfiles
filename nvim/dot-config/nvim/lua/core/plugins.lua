@@ -24,7 +24,7 @@ return packer.startup(function(use)
     use "wbthomason/packer.nvim" -- plugin manager
     use "kyazdani42/nvim-web-devicons" -- Lua fork of vim-web-devicons
     use "kyazdani42/nvim-tree.lua" -- file tree
-    use "nvim-treesitter/nvim-treesitter" -- Treesitter
+    use "romus204/tree-sitter-manager.nvim" -- Treesitter manager
     use "nvim-treesitter/nvim-treesitter-context" -- context
     use "norcalli/nvim-colorizer.lua" -- Colors highlighter
     use 'marko-cerovac/material.nvim' -- material colorscheme

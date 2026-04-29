@@ -1,17 +1,23 @@
-local ok, treesitter = pcall(require, 'nvim-treesitter.configs')
+local ok, treesitter = pcall(require, 'tree-sitter-manager')
 if not ok then
     return
 end
 
-treesitter.setup {
-    highlight = {
-        enable = true,
-    },
-    indent = {
-        true,
-        disabled = { "python" },
-    }
-}
+treesitter.setup ({
+    highlight = true,
+    -- {
+    --     enable = true,
+    -- },
+    -- indent = {
+    --     true,
+    --     disabled = { "python" },
+    -- }
+     ensure_installed = {
+         "c",
+         "cpp",
+         "rust",
+     },
+})
 
 -- <============ Treesitter Context ============>
 local ok2, ts_context = pcall(require, 'treesitter-context')
